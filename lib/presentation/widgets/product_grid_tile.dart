@@ -43,7 +43,7 @@ class ProductGridTile extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
-              Text("\$${product.prodRkPrice}", style: const TextStyle(fontWeight: FontWeight.bold),),
+              Text("₹ ${product.prodRkPrice}", style: const TextStyle(fontWeight: FontWeight.bold),),
               Text("Code : ${product.prodCode}")
             ],
           ),

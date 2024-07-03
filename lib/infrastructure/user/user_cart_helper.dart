@@ -24,7 +24,7 @@ class CartDatabaseHelper implements CartService{
 
   final String databaseName = "cart.db";
   final String cartTable =
-      "CREATE TABLE carts (userName TEXT, retailerName TEXT, productName TEXT, productPrice TEXT, cartQuantity TEXT, currentLocation TEXT)";
+      "CREATE TABLE carts (userName TEXT, retailerName TEXT, productName TEXT, productPrice TEXT, cartQuantity TEXT, currentLocation TEXT, totalAmount TEXT)";
 
   Future<Database> initDB() async {
     final databasePath = await getDatabasesPath();
@@ -112,6 +112,12 @@ class CartDatabaseHelper implements CartService{
         whereArgs: [userName, productName]);
   }
   
-
+    // New method to delete all cart items by userName and retailerName
+  Future<int> deleteAllCartItems(String userName, String retailerName) async {
+    final Database db = await initDB();
+    return db.delete('carts',
+        where: 'userName = ? AND retailerName = ?',
+        whereArgs: [userName, retailerName]);
+  }
 
 }

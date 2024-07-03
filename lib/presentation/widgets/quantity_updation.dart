@@ -50,10 +50,11 @@ class _CartQtyUpdationState extends State<CartQtyUpdation> {
     return Row(
           children: [
             Container(
-              height: 30,
+              height: 40,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.grey.shade700,
+                borderRadius: BorderRadius.circular(5),
+                border: Border.all(color: Colors.grey.shade400),
+                color: Colors.white,
               ),
               child: Row(
                 children: [
@@ -64,27 +65,30 @@ class _CartQtyUpdationState extends State<CartQtyUpdation> {
                 String latLng = '${position.latitude}, ${position.longitude}';
                     String? currentUser = await SharedPrefsHelper().getStringFromPrefs("userName");
                     String? currentRetailer = await SharedPrefsHelper().getStringFromPrefs("Retailer");
-                      Cart cart = Cart(userName: currentUser!, retailerName: currentRetailer!, productName: widget.productName, productPrice: widget.price, cartQuantity: qty.toString(), currentLocation: latLng);
+                    final totalAmount = qty * double.parse(widget.price);
+                      Cart cart = Cart(userName: currentUser!, retailerName: currentRetailer!, productName: widget.productName, productPrice: widget.price, cartQuantity: qty.toString(), currentLocation: latLng, totalAmount: totalAmount.toString());
                       await CartDatabaseHelper().updateCart(cart);
                       BlocProvider.of<CartListBloc>(context).add(CartListEvent.initialize(
         userName: currentUser, retailerName: currentRetailer));
                     },
                     child: Container(
-                      width: 28,
-                      height: 30,
+                      width: 36,
+                      height: 40,
                       decoration: BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.circular(100)),
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(color: Colors.grey.shade200)
+                          ),
                       child: const Icon(
                         Icons.remove,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                     ),
                   ),
                   Container(
-                    width: 32,
-                    height: 30,
-                    child: Center(child: Text('$qty')),
+                    width: 36,
+                    height: 40,
+                    child: Center(child: Text('$qty', style: const TextStyle(fontSize: 17),)),
                   ),
                   GestureDetector(
                     onTap: () async {
@@ -93,20 +97,23 @@ class _CartQtyUpdationState extends State<CartQtyUpdation> {
                 String latLng = '${position.latitude}, ${position.longitude}';
                     String? currentUser = await SharedPrefsHelper().getStringFromPrefs("userName");
                     String? currentRetailer = await SharedPrefsHelper().getStringFromPrefs("Retailer");
-                      Cart cart = Cart(userName: currentUser!, retailerName: currentRetailer!, productName: widget.productName, productPrice: widget.price, cartQuantity: qty.toString(), currentLocation: latLng);
+                    final totalAmount = qty * double.parse(widget.price);
+                      Cart cart = Cart(userName: currentUser!, retailerName: currentRetailer!, productName: widget.productName, productPrice: widget.price, cartQuantity: qty.toString(), currentLocation: latLng, totalAmount: totalAmount.toString());
                       await CartDatabaseHelper().updateCart(cart);
                       BlocProvider.of<CartListBloc>(context).add(CartListEvent.initialize(
         userName: currentUser, retailerName: currentRetailer));
                     },
                     child: Container(
-                      width: 28,
-                      height: 30,
+                      width: 36,
+                      height: 40,
                       decoration: BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.circular(100)),
+                          color: Colors.grey.shade100,
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(color: Colors.grey.shade200)
+                          ),
                       child: const Icon(
                         Icons.add,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                     ),
                   ),

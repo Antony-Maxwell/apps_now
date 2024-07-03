@@ -17,9 +17,10 @@ class CustomBottomNav extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
+            const SizedBox(width: 50,),
             const Expanded(
               child: Text(
-                'Are you a Retailer ? Click here >',
+                'Register a retailer >',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),

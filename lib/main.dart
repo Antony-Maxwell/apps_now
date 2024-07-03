@@ -1,6 +1,7 @@
 import 'package:apps_now/application/bloc/products_bloc.dart';
 import 'package:apps_now/application/cart/bloc/cart_list_bloc.dart';
 import 'package:apps_now/application/cartquantity/cart_count_bloc.dart';
+import 'package:apps_now/application/orders/bloc/orders_bloc.dart';
 import 'package:apps_now/application/retailers/bloc/retailers_bloc.dart';
 import 'package:apps_now/domain/core/di/injectable.dart';
 import 'package:apps_now/presentation/auth/splash_screen.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(create: (context) => getIt<RetailersBloc>(),),
         BlocProvider(create: (context) => getIt<CartListBloc>(),),
+        BlocProvider(create: (context) => getIt<OrdersBloc>(),),
         BlocProvider<CartCountBloc>(create: (context) => CartCountBloc(),),
       ],
       child: MaterialApp(

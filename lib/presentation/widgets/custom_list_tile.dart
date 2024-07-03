@@ -27,7 +27,7 @@ class CustomListTile extends StatelessWidget {
             content: const Text('Do you want to check-in to this retailer, after check-in you cannot check-in to another retailer'),
             actions: [
               TextButton(onPressed: (){
-                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FeedbackScreen(),), (route) => false);
+                Navigator.pop(context);
               }, child: const Text(
                 'Cancel'
               )),

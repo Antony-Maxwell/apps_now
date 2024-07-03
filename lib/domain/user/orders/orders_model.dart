@@ -1,5 +1,5 @@
 
-class Order {
+class Orders {
     final String orderId;
     final String userName;
     final String retailerName;
@@ -8,7 +8,7 @@ class Order {
     final String totalAmount;
     final String time;
 
-    Order({
+    Orders({
         required this.orderId,
         required this.userName,
         required this.retailerName,
@@ -18,7 +18,7 @@ class Order {
         required this.time,
     });
 
-    factory Order.fromMap(Map<String, dynamic> json) => Order(
+    factory Orders.fromMap(Map<String, dynamic> json) => Orders(
         orderId: json["orderId"],
         userName: json["userName"],
         retailerName: json["retailerName"],

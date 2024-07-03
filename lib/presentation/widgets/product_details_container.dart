@@ -31,7 +31,7 @@ class ProductDetailsContaienr extends StatelessWidget {
         height: 10,
       ),
       Text(
-        'Price : \$${product.prodRkPrice}',
+        'Price : ₹ ${product.prodRkPrice}',
         style: const TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 18,

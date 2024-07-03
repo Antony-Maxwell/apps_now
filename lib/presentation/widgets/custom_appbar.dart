@@ -1,18 +1,20 @@
 
 import 'package:apps_now/infrastructure/sharedprefs/shared_prefs.dart';
 import 'package:apps_now/presentation/home/cart_screen.dart';
+import 'package:apps_now/presentation/home/feedback.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
     super.key,
-    required GlobalKey<ScaffoldState> scaffoldKey, required this.isMainScreen, required this.title, required this.isCart,
+    required GlobalKey<ScaffoldState> scaffoldKey, required this.isMainScreen, required this.title, required this.isCart, required this.isProd,
   }) : _scaffoldKey = scaffoldKey;
 
   final GlobalKey<ScaffoldState> _scaffoldKey;
   final bool isMainScreen;
   final String title;
   final bool isCart;
+  final bool isProd;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +46,12 @@ class CustomAppBar extends StatelessWidget {
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          isProd
+          ?
+          IconButton(onPressed: () {
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FeedbackScreen(),), (route) => false) ;
+          }, icon: const Icon(Icons.logout))
+          :
           const SizedBox(),
           Text(title, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
           isCart

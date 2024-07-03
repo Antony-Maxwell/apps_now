@@ -22,6 +22,7 @@ class DetailedScreen extends StatelessWidget {
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               CustomAppBar(
+                isProd: false,
                 isCart: false,
                   scaffoldKey: scaffoldKey,
                   isMainScreen: false,

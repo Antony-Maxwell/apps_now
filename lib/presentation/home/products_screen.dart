@@ -21,6 +21,7 @@ class ProductsScreen extends StatelessWidget {
             child: Column(
               children: [
                 CustomAppBar(
+                  isProd: false,
                   isCart: true,
                     scaffoldKey: _scaffoldKey,
                     isMainScreen: false,

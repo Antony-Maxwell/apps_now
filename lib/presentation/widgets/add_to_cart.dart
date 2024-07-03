@@ -87,7 +87,8 @@ class AddToCartContainer extends StatelessWidget {
                 String latLng = '${position.latitude}, ${position.longitude}';
                     String? currentUser = await SharedPrefsHelper().getStringFromPrefs("userName");
                     String? currentRetailer = await SharedPrefsHelper().getStringFromPrefs("Retailer");
-                    Cart userCart = Cart(userName: currentUser!, retailerName: currentRetailer!, productName: product.prodName!, productPrice: product.prodRkPrice!, cartQuantity: state.cartCount.toString(), currentLocation: latLng);
+                    final totalAmount = state.cartCount * double.parse(product.prodRkPrice!);
+                    Cart userCart = Cart(userName: currentUser!, retailerName: currentRetailer!, productName: product.prodName!, productPrice: product.prodRkPrice!, cartQuantity: state.cartCount.toString(), currentLocation: latLng, totalAmount: totalAmount.toString());
                     _databaseHelper.insertCart(userCart,context );
                     BlocProvider.of<CartCountBloc>(context).add(ResetCart());
                   },

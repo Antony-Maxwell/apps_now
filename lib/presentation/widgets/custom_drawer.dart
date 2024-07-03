@@ -1,5 +1,6 @@
 import 'package:apps_now/presentation/auth/login_screen.dart';
 import 'package:apps_now/presentation/auth/splash_screen.dart';
+import 'package:apps_now/presentation/home/orders.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -49,6 +50,13 @@ class CustomDrawer extends StatelessWidget {
                     ),
                   ),
                   const Divider(),
+                  ListTile(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => OrdersScreen(),));
+                    },
+                    leading: const Icon(Icons.shopping_bag_sharp, size: 25,),
+                    title: const Text('Orders', style: TextStyle(fontSize: 20),),
+                  ),
                   const Spacer(),
                   TextButton(
                     onPressed: () async {

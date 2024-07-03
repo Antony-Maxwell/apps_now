@@ -44,7 +44,7 @@ class HomeScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomAppBar(isCart: false ,scaffoldKey: _scaffoldKey, isMainScreen: true, title: 'AppsNow'),
+                      CustomAppBar(isCart: false ,scaffoldKey: _scaffoldKey, isMainScreen: true, title: 'AppsNow', isProd: false),
                       const SizedBox(
                         height: 10,
                       ),

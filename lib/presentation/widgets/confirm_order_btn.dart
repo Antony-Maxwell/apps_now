@@ -14,11 +14,12 @@ class ConfirmOrderButtn extends StatelessWidget {
   const ConfirmOrderButtn({
     super.key,
     required this.userName,
-    required this.retailerName,
+    required this.retailerName, required this.orderTotal,
   });
 
   final String userName;
   final String retailerName;
+  final double orderTotal;
 
   @override
   Widget build(BuildContext context) {
@@ -84,20 +85,21 @@ class ConfirmOrderButtn extends StatelessWidget {
                                 String formattedDate =
                                     DateFormat('yyyy-MM-dd – kk:mm:ss')
                                         .format(now);
-                                final order = Order(
+                                final order = Orders(
                                     orderId: orderId,
                                     userName: userName,
                                     retailerName: retailerName,
                                     userLocation: latLng,
                                     productsCount:
                                         state.cartList.length.toString(),
-                                    totalAmount: "100",
+                                    totalAmount: orderTotal.toString(),
                                     time: formattedDate);
                                 await OrderDatabaseHelper().insertOrder(order);
                                 Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => OrderConfirmScreen(
+                                        orderTotal: orderTotal,
                                           orderId: orderId,
                                           userName: userName,
                                           retailerName: retailerName,
@@ -116,12 +118,12 @@ class ConfirmOrderButtn extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.deepPurple,
                         borderRadius: BorderRadius.circular(15)),
-                    child: const Center(
+                    child: Center(
                       child: Padding(
                         padding: const EdgeInsets.all(5),
                         child: Text(
-                          'Confirm Order',
-                          style: TextStyle(
+                          'Confirm Order       ₹ $orderTotal',
+                          style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 18,

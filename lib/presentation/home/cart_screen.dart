@@ -78,6 +78,7 @@ class CartScreen extends StatelessWidget {
                         itemBuilder: (context, index) {
                           final cart = state.cartList[index];
                           return CartContainer(
+                              totalAmount: cart.totalAmount,
                               cart: cart,
                               userName: userName,
                               retailerName: retailerName);
@@ -89,6 +90,21 @@ class CartScreen extends StatelessWidget {
           }
         },
       ),
-    ), bottomNavigationBar: ConfirmOrderButtn(userName: userName, retailerName: retailerName)));
+    ), bottomNavigationBar: BlocBuilder<CartListBloc, CartListState>(
+      builder: (context, state) {
+        if(state.isLoading){
+          return CircularProgressIndicator();
+        }else if(state.hasError){
+          return Center(child: Text('Error'),);
+        }else{
+          double totalAmount = state.cartList.fold(
+                0, (sum, cart) => sum + double.parse(cart.totalAmount)
+              );
+              String formattedValue = totalAmount.toStringAsFixed(2);
+        return ConfirmOrderButtn(
+            userName: userName, retailerName: retailerName, orderTotal: double.parse(formattedValue),);
+      }
+      }
+    )));
   }
 }

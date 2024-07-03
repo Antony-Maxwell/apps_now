@@ -1,7 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:ffi';
-
 import 'package:apps_now/domain/products/products_model/products.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';

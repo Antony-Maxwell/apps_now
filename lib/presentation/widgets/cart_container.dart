@@ -11,15 +11,18 @@ class CartContainer extends StatelessWidget {
     super.key,
     required this.cart,
     required this.userName,
-    required this.retailerName,
+    required this.retailerName, required this.totalAmount,
   });
 
   final Cart cart;
   final String userName;
   final String retailerName;
+  final String totalAmount;
 
   @override
   Widget build(BuildContext context) {
+  double doubleValue = double.parse(totalAmount);
+  String formattedValue = doubleValue.toStringAsFixed(2);
     return Container(
       height: 180,
       decoration: BoxDecoration(
@@ -51,31 +54,34 @@ class CartContainer extends StatelessWidget {
                     cart.productName,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    'Retailer : ${cart.retailerName}',
-                    style: TextStyle(
+                    cart.retailerName,
+                    style: const TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w300,
                     ),
                   ),
-                  Text(
-                      'Quantity : ${cart.cartQuantity}'),
+                  const SizedBox(height: 10,),
+                  Text(" ₹ $formattedValue", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),),
                   const SizedBox(
-                    height: 25,
+                    height: 40,
                   ),
-                  CartQtyUpdation(
-                    productName: cart.productName,
-                    price: cart.productPrice,
-                    quantity:
-                        int.parse(cart.cartQuantity),
-                  ),
-                  TextButton(
-                      onPressed: () async {
+                  Row(
+                    children: [
+                      CartQtyUpdation(
+                        productName: cart.productName,
+                        price: cart.productPrice,
+                        quantity:
+                            int.parse(cart.cartQuantity),
+                      ),
+                      const SizedBox(width: 50,),
+                      GestureDetector(
+                        onTap: () async {
                         await CartDatabaseHelper()
                             .deleteCart(userName,
                                 cart.productName);
@@ -87,10 +93,24 @@ class CartContainer extends StatelessWidget {
                                     retailerName:
                                         retailerName));
                       },
-                      child: const Text('Remove'))
+                        child: Container(
+                          height: 40,
+                          width: 36,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.grey.shade400),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: const Center(
+                            child: Icon(Icons.delete_forever),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

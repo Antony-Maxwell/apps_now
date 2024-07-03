@@ -1,14 +1,16 @@
+import 'package:apps_now/infrastructure/user/user_cart_helper.dart';
 import 'package:apps_now/presentation/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class OrderConfirmScreen extends StatelessWidget {
-  const OrderConfirmScreen({super.key, required this.orderId, required this.userName, required this.retailerName, required this.location, required this.time});
+  const OrderConfirmScreen({super.key, required this.orderId, required this.userName, required this.retailerName, required this.location, required this.time, required this.orderTotal});
   final String orderId;
   final String userName;
   final String retailerName;
   final String location;
   final String time;
+  final double orderTotal;
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +46,15 @@ class OrderConfirmScreen extends StatelessWidget {
                       const Text(
                         'OverView',
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        'Grand Total : ₹ $orderTotal',
+                        style: const TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold
                         ),
                       ),
                       Text(
@@ -73,11 +82,12 @@ class OrderConfirmScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                TextButton(onPressed: (){
+                TextButton(onPressed: ()async{
+                  await CartDatabaseHelper().deleteAllCartItems(userName, retailerName);
                   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomeScreen(),), (route) => false);
-                }, child: const Text(
-                  'Go to Home',
-                  style: TextStyle(
+                }, child: Text(
+                  'CheckOut from $retailerName',
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
